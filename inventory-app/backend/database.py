@@ -4,9 +4,7 @@ import os
 
 DATABASE_URL = os.getenv("DATABASE_URL", "sqlite+aiosqlite:///./inventory.db")
 
-# แปลง URL ให้ใช้ asyncpg driver เสมอ
 if "postgres" in DATABASE_URL:
-    # ตัด scheme เดิมออกทั้งหมด แล้วใส่ใหม่
     DATABASE_URL = "postgresql+asyncpg://" + DATABASE_URL.split("://", 1)[1]
 
 engine = create_async_engine(DATABASE_URL, echo=False)
